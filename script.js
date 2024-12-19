@@ -1,5 +1,6 @@
 // Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+  const API_BASE_URL = 'http://35.78.205.162:3000'; // 後端 API 基本 URL
   const uploadForm = document.getElementById('uploadForm');
   const fileList = document.getElementById('fileList');
 
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
       try {
         const formData = new FormData();
         formData.append('file', file);
-        const response = await fetch('http://localhost:3000/upload', {
+        const response = await fetch(`${API_BASE_URL}/upload`, {
           method: 'POST',
           body: formData,
         });
@@ -44,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Load the file list
   async function loadFiles() {
     try {
-      const response = await fetch('http://localhost:3000/files');
+      const response = await fetch(`${API_BASE_URL}/files`);
       if (response.ok) {
         const files = await response.json();
         console.log('Files:', files);

@@ -10,12 +10,14 @@ const path = require('path');
 const app = express();
 
 // Middleware
-app.use(cors()); // 解決跨域問題
+app.use(cors({
+     origin: 'http://35.78.205.162',
+}));
 app.use(express.json()); // 解析 JSON 請求
 app.use(express.static(path.join(__dirname, '../'))); // 提供靜態文件服務 (index.html)
 
 // MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/myappdb')
+mongoose.connect('mongodb://localhost:27017/db_practice')
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.error('MongoDB connection error:', err));
 

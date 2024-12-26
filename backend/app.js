@@ -9,6 +9,13 @@ const path = require('path');
 
 const app = express();
 
+// 在 app.js 的開頭添加以下代碼進行調試
+console.log('Environment variables:', {
+    AWS_REGION: process.env.AWS_REGION,
+    S3_BUCKET_NAME: process.env.S3_BUCKET_NAME,
+    // 不要記錄敏感的認證信息
+});
+
 // Middleware
 app.use(cors({
      origin: 'http://35.78.205.162',
@@ -37,6 +44,12 @@ const s3 = new S3Client({
         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     },
 });
+
+// 添加環境變數檢查
+if (!process.env.S3_BUCKET_NAME) {
+    console.error('Error: S3_BUCKET_NAME environment variable is not set');
+    process.exit(1);
+}
 
 // Multer-S3 Configuration
 const upload = multer({

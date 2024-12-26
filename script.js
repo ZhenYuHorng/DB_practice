@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', function() {
       try {
         const formData = new FormData();
         formData.append('file', file);
-        const response = await fetch(`${API_BASE_URL}/upload`, {
-          method: 'POST',
-          body: formData,
-        });
+        const response = await fetch(`${API_BASE_URL}/upload`, {  // 確保使用 API_BASE_URL
+        method: 'POST',
+        body: formData,
+      });
 
         if (response.ok) {
           const result = await response.json();
